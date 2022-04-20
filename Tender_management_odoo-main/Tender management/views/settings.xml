@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.sale</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="10"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div class="app_settings_block" data-string="Tender" string="Tender" data-key="Tender management">
+                    <h2>Tender Management</h2>
+
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_tender_config_settings" model="ir.actions.act_window">
+        <field name="name">Tender Settings</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_id" ref="res_config_settings_view_form"/>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="context">{'module' : 'Tender management'}</field>
+    </record>
+
+
+    <record id="action_tender_department_model" model="ir.actions.act_window">
+        <field name="name">Departments</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">tender.department</field>
+        <field name="view_mode">form,tree</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Create your First Tender !
+          </p>
+        </field>
+    </record>
+
+
+    <record id="action_tender_questionnaries" model="ir.actions.act_window">
+        <field name="name">Questionnaries</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">tender.questionnaires</field>
+        <field name="view_mode">form,tree</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Questionnaries !
+          </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_tender_configuration"
+        name="Configuration"
+        parent="tender_root"
+        sequence="100"/>
+
+    <menuitem id="menu_tender_settings"
+        name="Settings"
+        parent="menu_tender_configuration"
+        sequence="10"
+        action="action_tender_config_settings"/>
+
+    <menuitem id="menu_tender_department"
+        name="Departments"
+        parent="menu_tender_configuration"
+        sequence="12"
+        action="action_tender_department_model"/>
+
+    <menuitem id="menu_tender_questionnaries"
+        name="Quesitionnaries"
+        parent="menu_tender_configuration"
+        sequence="13"
+        action="action_tender_questionnaries"/>
+</odoo>

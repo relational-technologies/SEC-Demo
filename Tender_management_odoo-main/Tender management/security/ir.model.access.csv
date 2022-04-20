@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tender_tender,access.tender.tender,Tender management.model_tender_tender,,1,1,1,1
+access_tender_enquiry,access.tender.enquiry,Tender management.model_tender_enquiry,,1,1,1,1
+access_tender_estimation,access.tender.estimation,Tender management.model_tender_estimation,,1,1,1,1
+access_tender_department,access.tender.department,Tender management.model_tender_department,,1,1,1,1
+access_tender_questionnaires,access.tender.questionnaires,Tender management.model_tender_questionnaires,,1,1,1,1
