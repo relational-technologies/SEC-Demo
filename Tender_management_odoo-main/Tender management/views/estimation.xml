@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+
+    <record id="estimation_Tree" model="ir.ui.view">
+            <field name="name">estimation.tree</field>
+            <field name="model">tender.estimation</field>
+<!--            <field name="priority" eval="20"/>-->
+            <field name="arch" type="xml">
+                <tree string="Estimation">
+                    <field name="enq_number"/>
+                    <field name="contractor"/>
+                    <field name="estimator"/>
+                    <field name="reviewer"/>
+                    <field name="job_type"/>
+                    <field name="total_estimation"/>
+                </tree>
+            </field>
+     </record>
+
+
+     <record id="tender_estimation_form" model="ir.ui.view">
+            <field name="name">estimation.form</field>
+            <field name="model">tender.estimation</field>
+<!--            <field name="priority" eval="20"/>-->
+            <field name="arch" type="xml">
+                <form string="Estimation">
+                    <sheet>
+<!--                    <field name="image_1920" widget='image' class="oe_avatar" options='{"preview_image": "image_128"}' readonly="1"/>-->
+<!--                    <div class="oe_title">-->
+                        <h1>
+<!--                            <field name="name" readonly="1"/>-->
+                        </h1>
+<!--                    </div>-->
+<!--                    <field name="parent_id" invisible="1"/>-->
+
+                    <group>
+                         <group>
+                            <field name="enq_number"/>
+                            <field name="contractor"/>
+                            <field name="estimator"/>
+                            <field name="reviewer"/>
+                            <field name="currency"/>
+                            <field name="job_type"/>
+                             <field name="reference"/>
+                             <field name="total_estimation"/>
+
+
+                        </group>
+
+                        <group>
+<!--                            <label for="type" attrs="{'invisible': [('parent_id','=', False)]}" groups=""/>-->
+<!--                            <div attrs="{'invisible': [('parent_id','=', False)]}" name="div_type" groups="">-->
+<!--                                <field name="type" class="oe_inline"/>-->
+<!--                            </div>-->
+                            <field name="date"/>
+                            <field name="submission"/>
+
+
+                            <label for="street" string="Duration"/>
+                            <div class="o_address_format">
+<!--                                <field name="street" placeholder="Street..." class="o_address_street"/>-->
+<!--&lt;!&ndash;                                <field name="street2" placeholder="Street 2..." class="o_address_street"/>&ndash;&gt;-->
+<!--                                <field name="city" placeholder="City" class="o_address_city"/>-->
+                                <field name="duration_from" class="oe_inline" placeholder="From" style="width:45%"/>
+                                <span> - </span>
+                                <field name="duration_to" placeholder="To" class="oe_inline" style="width:45%"/>
+<!--                                <field name="country_id" placeholder="Country" class="o_address_country" options='{"no_open": True, "no_create": True}'/>-->
+                            </div>
+
+
+
+
+
+
+                            <label for="street" string="Address"/>
+                            <div class="o_address_format">
+                                <field name="street" placeholder="Street..." class="o_address_street"/>
+<!--                                <field name="street2" placeholder="Street 2..." class="o_address_street"/>-->
+                                <field name="city" placeholder="City" class="o_address_city"/>
+                                <field name="state_id" class="o_address_state" placeholder="State" options='{"no_open": True}'/>
+                                <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+                                <field name="country_id" placeholder="Country" class="o_address_country" options='{"no_open": True, "no_create": True}'/>
+                            </div>
+
+
+
+<!--                            <field name="website" widget="url" placeholder="e.g. https://www.odoo.com"/>-->
+                        </group>
+
+                    </group>
+<!--                        <notebook>-->
+<!--                              <page string="Documents">-->
+<!--&lt;!&ndash;                                 <field name=""/>&ndash;&gt;-->
+<!--                             </page>-->
+
+<!--                            <page string="Pre-Bid Meeting Details">-->
+<!--&lt;!&ndash;                                <field name=""/>&ndash;&gt;-->
+<!--                            </page>-->
+
+<!--                             <page string="Enquiries">-->
+<!--&lt;!&ndash;                                <field name=""/>&ndash;&gt;-->
+<!--                            </page>-->
+
+<!--                             <page string="Tender Questionnaires">-->
+<!--&lt;!&ndash;                                <field name=""/>&ndash;&gt;-->
+<!--                            </page>-->
+
+<!--                             <page string="Top 10 Bidders">-->
+<!--&lt;!&ndash;                                <field name=""/>&ndash;&gt;-->
+<!--                            </page>-->
+<!--                        </notebook>-->
+
+<!--                        <notebook>-->
+<!--                            <page string="Audit Log">-->
+
+<!--                            </page>-->
+<!--                        </notebook>-->
+                    </sheet>
+                         <div class="oe_chatter">
+                            <field name="message_follower_ids" widget="mail_followers"/>
+                            <field name="activity_ids" widget="mail_activity"/>
+                            <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
+                         </div>
+
+                </form>
+            </field>
+        </record>
+
+
+
+    <record id="action_estimation" model="ir.actions.act_window">
+        <field name="name">Estimation</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">tender.estimation</field>
+        <field name="view_mode">tree,form</field>
+<!--        <field name="context">{"search_default_female":1}</field>-->
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Create your First Tender !
+          </p>
+        </field>
+    </record>
+    <menuitem id="tender_estimation" name="Estimation" parent="tender_root" action="action_estimation" sequence="13"/>
+<!--    <menuitem id="create_appointment" name="Create Appointment" parent="hospital_root"-->
+<!--              action="create_appointment_wizard" sequence="40"/>-->
+</odoo>

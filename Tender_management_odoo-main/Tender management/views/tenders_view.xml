@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+
+     <record id="tender_Tree" model="ir.ui.view">
+            <field name="name">tender.tree.view</field>
+            <field name="model">tender.tender</field>
+<!--            <field name="priority" eval="20"/>-->
+            <field name="arch" type="xml">
+                <tree string="Tender">
+                    <field name="tender_code"/>
+                    <field name="tender_name"/>
+                    <field name="department"/>
+                    <field name="opening_date"/>
+                    <field name="bid_from"/>
+                    <field name="bid_to"/>
+                </tree>
+            </field>
+     </record>
+
+
+
+     <record id="tender_address_form" model="ir.ui.view">
+            <field name="name">tender.form.address</field>
+            <field name="model">tender.tender</field>
+<!--            <field name="priority" eval="20"/>-->
+            <field name="arch" type="xml">
+                <form string="Tender">
+                    <header>
+                        <button name="action_open" type="object" string="Open" class="oe_highlight"
+                                attrs="{'invisible': [('state','!=', 'draft')]}"/>
+
+                        <button name="action_pass" type="object" string="Pass" class="oe_highlight"
+                                attrs="{'invisible': [('state','!=', 'open')]}"/>
+<!--                        <button name="" type="object" string="Delete" class="oe_highlight"/>-->
+<!--                        <button name="" type="object" string="Record Set Operations" class="oe_highlight"/>-->
+                        <field name="state" widget="statusbar" statusbar_visible="draft,open,pass"/>
+                    </header>
+
+                    <sheet>
+<!--                    <field name="image_1920" widget='image' class="oe_avatar" options='{"preview_image": "image_128"}' readonly="1"/>-->
+<!--                    <div class="oe_title">-->
+                        <h1>
+<!--                            <field name="name" readonly="1"/>-->
+                        </h1>
+<!--                    </div>-->
+<!--                    <field name="parent_id" invisible="1"/>-->
+                        <field name="tender_code"/>
+                        <group>
+                            <field name="tender_name"/>
+                        </group>
+
+                    <group>
+                        <group>
+<!--                            <label for="type" attrs="{'invisible': [('parent_id','=', False)]}" groups=""/>-->
+<!--                            <div attrs="{'invisible': [('parent_id','=', False)]}" name="div_type" groups="">-->
+<!--                                <field name="type" class="oe_inline"/>-->
+<!--                            </div>-->
+                            <label for="street" string="Address"/>
+                            <div class="o_address_format">
+                                <field name="street" placeholder="Street..." class="o_address_street"/>
+<!--                                <field name="street2" placeholder="Street 2..." class="o_address_street"/>-->
+                                <field name="city" placeholder="City" class="o_address_city"/>
+                                <field name="state_id" class="o_address_state" placeholder="State" options='{"no_open": True}'/>
+                                <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+                                <field name="country_id" placeholder="Country" class="o_address_country" options='{"no_open": True, "no_create": True}'/>
+                            </div>
+
+                             <field name="department"/>
+                            <field name="opening_date"/>
+                            <field name="bid_from"/>
+                            <field name="bid_to"/>
+
+
+<!--                            <field name="website" widget="url" placeholder="e.g. https://www.odoo.com"/>-->
+                        </group>
+                        <group>
+                            <field name="active"/>
+                            <field name="total_budget"/>
+                            <field name="earnest_money"/>
+                            <field name="performance_security"/>
+                            <field name="liquidated_damage"/>
+                            <field name="unliquidated_damage"/>
+
+
+                        </group>
+                    </group>
+                        <notebook>
+
+<!--                            <page string="Material">-->
+<!--                                 <field name="material_line_one2many">-->
+<!--                                    <tree editable="bottom">-->
+<!--                                        <field name="name"/>-->
+<!--                                        <field name="prod_description"/>-->
+<!--                                         <field name="quantity"/>-->
+<!--                                         <field name="pricee"/>-->
+<!--                                         <field name="note"/>-->
+<!--                                         <field name="amount"/>-->
+<!--&lt;!&ndash;                                        <field name="xyz" invisible="1"/>&ndash;&gt;-->
+<!--                                    </tree>-->
+
+<!--                                     <form>-->
+<!--                                         <group>-->
+<!--                                             <field name="name"/>-->
+<!--                                         </group>-->
+<!--                                         <group>-->
+<!--                                                 <field name="prod_description"/>-->
+<!--                                         </group>-->
+<!--                                         <group>-->
+<!--                                               <field name="quantity"/>-->
+<!--                                         </group>-->
+<!--                                         <group>-->
+<!--                                               <field name="pricee"/>-->
+<!--                                         </group>-->
+<!--                                         <group>-->
+<!--                                            <field name="note"/>-->
+<!--                                         </group>-->
+<!--                                         <group>-->
+<!--                                             <field name="amount"/>-->
+<!--                                         </group>-->
+
+
+<!--                                     </form>-->
+<!--                                 </field>-->
+<!--&lt;!&ndash;                                <field name=""/>&ndash;&gt;-->
+<!--                            </page>-->
+                              <page string="Documents">
+<!--                                  <group>-->
+<!--                                  <field name="document_title" invisible="1"/>-->
+<!--                                 <field name="document" filename="document_title"/>-->
+<!--                                  </group>-->
+                                  <group>
+                                      <field name="attachment" widget="many2many_binary"/>
+                                  </group>
+
+                             </page>
+
+                            <page string="Pre-Bid Meeting Details">
+                                <group>
+                                     <field name="meeting_date" style="width:200px"/>
+                                <field name="html_filed"/>
+                                </group>
+
+                            </page>
+
+                             <page string="Enquiries">
+
+                                 <field name="enquiry_lines">
+                                   <tree editable="bottom">
+<!--                                       <field name="sequence" widget="handle"/>-->
+<!--                                       <field name="product_id"/>-->
+<!--                                       <field name="product_qty"/>-->
+                                       <field name="enquiry_id" widget="many2many_tags" mode="tree" domain="[('tender.id', '=', active_id)]"/>
+                                   </tree>
+                                 </field>
+
+<!--                                   <record id="enquiry_Tree_test" model="ir.ui.view">-->
+<!--                                        <field name="name">enquiry.tree.page</field>-->
+<!--                                        <field name="model">tender.enquiry</field>-->
+<!--                            &lt;!&ndash;            <field name="priority" eval="20"/>&ndash;&gt;-->
+<!--                                        <field name="arch" type="xml">-->
+<!--                                            <tree string="Enquiry">-->
+<!--                                                <field name="enquiry_code"/>-->
+<!--                                                <field name="contractor"/>-->
+<!--                                                <field name="job_type"/>-->
+<!--                                                <field name="tender"/>-->
+<!--                                                <field name="date"/>-->
+<!--                                                <field name="total_score"/>-->
+<!--                                            </tree>-->
+<!--                                        </field>-->
+<!--                                 </record>-->
+
+<!--                                <field name=""/>-->
+                            </page>
+
+                             <page string="Tender Questionnaires">
+                                 <field name="question_lines">
+                                     <tree>
+                                         <field name="question_id"/>
+                                         <field name="answer_id"/>
+                                     </tree>
+                                 </field>
+<!--                                <field name=""/>-->
+                            </page>
+
+                             <page string="Top 10 Bidders">
+<!--                                <field name=""/>-->
+                            </page>
+                        </notebook>
+
+                        <notebook>
+                            <page string="Audit Log">
+
+                            </page>
+                        </notebook>
+                    </sheet>
+                         <div class="oe_chatter">
+                            <field name="message_follower_ids" widget="mail_followers"/>
+                            <field name="activity_ids" widget="mail_activity"/>
+                            <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
+                         </div>
+
+                </form>
+            </field>
+        </record>
+
+
+
+    <record id="action_tender" model="ir.actions.act_window">
+        <field name="name">Tender</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">tender.tender</field>
+        <field name="view_mode">tree,form</field>
+<!--        <field name="context">{"search_default_female":1}</field>-->
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Create your First Tender !
+          </p>
+        </field>
+    </record>
+    <menuitem id="tender_root" name="Tender" sequence="1" web_icon=""/>
+    <menuitem id="create_tender" name="Tender" parent="tender_root" action="action_tender" sequence="10"/>
+<!--    <menuitem id="create_appointment" name="Create Appointment" parent="hospital_root"-->
+<!--              action="create_appointment_wizard" sequence="40"/>-->
+</odoo>
